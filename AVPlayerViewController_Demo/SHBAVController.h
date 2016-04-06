@@ -10,6 +10,6 @@
 
 @interface SHBAVController : UIViewController
 
-- (id)initWithUrl:(NSString *)url;
+- (id)initWithUrl:(NSURL *)url;
 
 @end

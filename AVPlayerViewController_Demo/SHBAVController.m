@@ -19,15 +19,18 @@
 
 @implementation SHBAVController {
     AVPlayerViewController      *_playerController;
+    
+    
+    
     AVPlayer                    *_player;
     AVAudioSession              *_session;
-    NSString                    *_urlString;
+    NSURL                    *_url;
 }
 
-- (id)initWithUrl:(NSString *)url {
+- (id)initWithUrl:(NSURL *)url {
     self = [super init];
     if (self) {
-        _urlString = url;
+        _url = url;
     }
     return self;
 }
@@ -39,7 +42,9 @@
     _session = [AVAudioSession sharedInstance];
     [_session setCategory:AVAudioSessionCategoryPlayback error:nil];
     
-    _player = [AVPlayer playerWithURL:[NSURL URLWithString:_urlString]];
+    AVPlayerItem *item = [AVPlayerItem playerItemWithURL:_url];
+    
+    _player = [AVPlayer playerWithPlayerItem:item];
     _playerController = [[AVPlayerViewController alloc] init];
     _playerController.player = _player;
     _playerController.videoGravity = AVLayerVideoGravityResizeAspect;
